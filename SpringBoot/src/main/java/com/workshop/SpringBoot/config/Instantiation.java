@@ -3,6 +3,7 @@ package com.workshop.SpringBoot.config;
 import com.workshop.SpringBoot.domain.Post;
 import com.workshop.SpringBoot.domain.User;
 import com.workshop.SpringBoot.dto.AuthorDTO;
+import com.workshop.SpringBoot.dto.CommentDTO;
 import com.workshop.SpringBoot.repository.PostRepository;
 import com.workshop.SpringBoot.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
@@ -45,6 +46,13 @@ public class Instantiation implements CommandLineRunner {
 
         Post post1 = new Post(null, sdf.parse("21/03/2018"),"Partiu Viagem", "Vou viajar para São Paulo. Abraços!", new AuthorDTO(maria));
         Post post2 = new Post(null, sdf.parse("21/03/2018"),"Partiu Viagem", "Vou viajar para São Paulo. Abraços!", new AuthorDTO(maria));
+
+        CommentDTO c1 = new CommentDTO("Boa viagem mano!", sdf.parse("2018/03/21"), new AuthorDTO(alex));
+        CommentDTO c2 = new CommentDTO("Aproveite!", sdf.parse("2018/03/22"), new AuthorDTO(bob));
+        CommentDTO c3 = new CommentDTO("Tenha um ótimo dia!", sdf.parse("2018/03/23"), new AuthorDTO(alex));
+
+        post1.getComments().addAll(Arrays.asList(c1, c2));
+        post2.getComments().add(c3);
 
         postRepository.saveAll(Arrays.asList(post1, post2));
 
