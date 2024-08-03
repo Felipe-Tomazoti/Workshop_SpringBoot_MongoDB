@@ -1,5 +1,6 @@
 package com.workshop.SpringBoot.resources;
 
+import com.workshop.SpringBoot.domain.Post;
 import com.workshop.SpringBoot.domain.User;
 import com.workshop.SpringBoot.dto.UserDTO;
 import com.workshop.SpringBoot.services.UserService;
@@ -54,5 +55,10 @@ public class UserResource {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
+    }
 
 }
